@@ -1,0 +1,174 @@
+{
+  "set": "pacland",
+  "source": "https://github.com/mamedev/mame/blob/master/src/mame/namco/pacland.cpp",
+  "regions": {
+    "maincpu": {
+      "size": 131072,
+      "files": [
+        {
+          "name": "pl5_01b.8b",
+          "offset": 32768,
+          "size": 16384,
+          "crc32": "b0ea7631",
+          "sha1": "424afa6f397310c7af39c9e8b580aa9ccd42c39c"
+        },
+        {
+          "name": "pl5_02.8d",
+          "offset": 49152,
+          "size": 16384,
+          "crc32": "d903e84e",
+          "sha1": "25338726227bfbec65847879aac5228a6a307db4"
+        },
+        {
+          "name": "pl1_3.8e",
+          "offset": 65536,
+          "size": 16384,
+          "crc32": "aa9fa739",
+          "sha1": "7b1f7857eb5f68e166b1f8988c82051aaf05df48"
+        },
+        {
+          "name": "pl1_4.8f",
+          "offset": 81920,
+          "size": 16384,
+          "crc32": "2b895a90",
+          "sha1": "820f8873c6a5a736089406d0f03d491dfb82d00d"
+        },
+        {
+          "name": "pl1_5.8h",
+          "offset": 98304,
+          "size": 16384,
+          "crc32": "7af66200",
+          "sha1": "f44161ded1633e9801b7a9cd84d481e53823f5d9"
+        },
+        {
+          "name": "pl3_6.8j",
+          "offset": 114688,
+          "size": 16384,
+          "crc32": "2ffe3319",
+          "sha1": "c2540321cd5a1fe29ecb077abdf8f997893192e9"
+        }
+      ]
+    },
+    "mcu": {
+      "size": 4096,
+      "files": [
+        {
+          "name": "cus60-60a1.mcu",
+          "offset": 0,
+          "size": 4096,
+          "crc32": "076ea82a",
+          "sha1": "22b5e62e26390d7d5cacc0503c7aa5ed524204df"
+        }
+      ]
+    },
+    "mcusub": {
+      "size": 8192,
+      "files": [
+        {
+          "name": "pl1_7.3e",
+          "offset": 0,
+          "size": 8192,
+          "crc32": "8c5becae",
+          "sha1": "14d67136395c4c64472980a69648ce2d479ae67f"
+        }
+      ]
+    },
+    "fg_chars": {
+      "size": 8192,
+      "files": [
+        {
+          "name": "pl2_12.6n",
+          "offset": 0,
+          "size": 8192,
+          "crc32": "a63c8726",
+          "sha1": "b15903fa2267375280af03af0a7157e1b0bcb86d"
+        }
+      ]
+    },
+    "bg_chars": {
+      "size": 8192,
+      "files": [
+        {
+          "name": "pl4_13.6t",
+          "offset": 0,
+          "size": 8192,
+          "crc32": "3ae582fd",
+          "sha1": "696b2cfadb6b071de8e43d20cd65b37713ca3b30"
+        }
+      ]
+    },
+    "sprites": {
+      "size": 65536,
+      "files": [
+        {
+          "name": "pl1-9.6f",
+          "offset": 0,
+          "size": 16384,
+          "crc32": "f5d5962b",
+          "sha1": "8d008a9bc06dc562c241955d9c551647b5c1f4e9"
+        },
+        {
+          "name": "pl1-8.6e",
+          "offset": 16384,
+          "size": 16384,
+          "crc32": "a2ebfa4a",
+          "sha1": "4a2a2b43a23a7a46266751415d1bde118143429c"
+        },
+        {
+          "name": "pl1-10.7e",
+          "offset": 32768,
+          "size": 16384,
+          "crc32": "c7cf1904",
+          "sha1": "7ca8ed20ee32eb8609ac96b4e4fcb3b6027b598a"
+        },
+        {
+          "name": "pl1-11.7f",
+          "offset": 49152,
+          "size": 16384,
+          "crc32": "6621361a",
+          "sha1": "4efa40adba803006e86d5e12514983d4132b5efb"
+        }
+      ]
+    },
+    "proms": {
+      "size": 5120,
+      "files": [
+        {
+          "name": "pl1-2.1t",
+          "offset": 0,
+          "size": 1024,
+          "crc32": "472885de",
+          "sha1": "8d552c90b8d5bc6ad6c60934c00f4303cd180ce7"
+        },
+        {
+          "name": "pl1-1.1r",
+          "offset": 1024,
+          "size": 1024,
+          "crc32": "a78ebdaf",
+          "sha1": "8ea215701eb5e1a2a329ef92c19fc69b18fc28c7"
+        },
+        {
+          "name": "pl1-5.5t",
+          "offset": 2048,
+          "size": 1024,
+          "crc32": "4b7ee712",
+          "sha1": "dd0ec4c632d8b160f7b54d8f18fcf4ef1508d832"
+        },
+        {
+          "name": "pl1-4.4n",
+          "offset": 3072,
+          "size": 1024,
+          "crc32": "3a7be418",
+          "sha1": "475cdc68205e3acce83fe79b00b74c6a7e28dde4"
+        },
+        {
+          "name": "pl1-3.6l",
+          "offset": 4096,
+          "size": 1024,
+          "crc32": "80558da8",
+          "sha1": "7e1483467817295f36d1e2bdb32934c4f2617d52"
+        }
+      ]
+    }
+  }
+}

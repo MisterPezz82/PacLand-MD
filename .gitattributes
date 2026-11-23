@@ -1,0 +1,2 @@
+# Store every file byte-for-byte: keeps CRLF Windows launchers and LF shell scripts exactly as packaged.
+* -text

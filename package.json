@@ -1,0 +1,9 @@
+{
+  "name": "pacland-md-development",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=24"},
+  "devDependencies": {"romdevtools": "0.155.0"},
+  "scripts": {"build": "node tools/build.mjs", "test:emulator": "node tests/emulator.mjs"}
+}

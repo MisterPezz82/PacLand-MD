@@ -1,0 +1,7 @@
+PAC-LAND MD SOURCE ROM MAKER
+
+Read docs/rom-maker.md first. Dependencies are required.
+Windows: install requirements, run Setup.bat, then drop your own pacland ZIP on Make-ROM.bat.
+Linux: install requirements, run sh setup.sh, then sh make-rom.sh /path/to/pacland.zip.
+No arcade ROM, generated game assets or complete game ROM is included.
+The game remains an incomplete development build.
