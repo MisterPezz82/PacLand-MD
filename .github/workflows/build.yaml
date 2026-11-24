@@ -116,7 +116,7 @@ jobs:
         compression-level: 0
   build-macos:
     name: Build macOS Apple Silicon
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
