@@ -32,6 +32,15 @@ def icons():
         run('iconutil', '-c', 'icns', folder, '-o', ROOT / 'build/desktop/icon.icns')
 
 
+def archive_payload(payload, archive):
+    with tarfile.open(archive, 'w:gz', compresslevel=1) as out:
+        def include(info):
+            parts = Path(info.name).parts
+            return None if '__pycache__' in parts or (parts and parts[0] in ('build', 'dist', 'res', 'reference_roms')) else info
+        for child in sorted(payload.iterdir()):
+            out.add(child, arcname=child.name, filter=include)
+
+
 def build(target, assemble=True):
     expected = {'windows-x64': ('win32', ('amd64', 'x86_64')),
                 'linux-x64': ('linux', ('x86_64', 'amd64')),
@@ -47,14 +56,8 @@ def build(target, assemble=True):
     if not (payload / 'runtime/portable-manifest.json').is_file():
         raise RuntimeError('Assemble the portable tool bundle first.')
     icons()
-    if target == 'windows-x64':
-        archive = ROOT / 'build/desktop/payload.tar.gz'
-        with tarfile.open(archive, 'w:gz', compresslevel=1) as out:
-            def include(info):
-                parts = Path(info.name).parts
-                return None if '__pycache__' in parts or (parts and parts[0] in ('build', 'dist', 'res', 'reference_roms')) else info
-            for child in sorted(payload.iterdir()):
-                out.add(child, arcname=child.name, filter=include)
+    if target in ('windows-x64', 'macos-arm64'):
+        archive_payload(payload, ROOT / 'build/desktop/payload.tar.gz')
     run(sys.executable, '-m', 'PyInstaller', '--noconfirm', '--clean',
         '--distpath', ROOT / 'dist/desktop', '--workpath', ROOT / 'build/pyinstaller',
         APP / 'desktop.spec')

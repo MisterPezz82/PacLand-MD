@@ -1,5 +1,4 @@
 from pathlib import Path
-from PyInstaller.building.datastruct import Tree
 import sys
 
 app_dir = Path(SPEC).resolve().parent
@@ -7,7 +6,7 @@ root = app_dir.parents[2]
 build_dir = root / 'build/desktop'
 name = 'PacLand-ROM-Maker'
 data = [(str(app_dir / 'assets'), 'assets')]
-if sys.platform == 'win32':
+if sys.platform in ('win32', 'darwin'):
     data.append((str(build_dir / 'payload.tar.gz'), '.'))
 analysis = Analysis([str(app_dir / 'main.py')], pathex=[str(app_dir)], binaries=[],
                     datas=data, hiddenimports=[], hookspath=[], hooksconfig={},
@@ -22,8 +21,7 @@ else:
     if sys.platform == 'darwin':
         options['target_arch'] = 'arm64'
     executable = EXE(archive, analysis.scripts, [], exclude_binaries=True, **options)
-    extra = [Tree(str(build_dir / 'payload'), prefix='payload', typecode='DATA')] if sys.platform == 'darwin' else []
-    collection = COLLECT(executable, analysis.binaries, analysis.datas, *extra,
+    collection = COLLECT(executable, analysis.binaries, analysis.datas,
                          strip=False, upx=False, name=name)
     if sys.platform == 'darwin':
         bundle = BUNDLE(collection, name=name + '.app',

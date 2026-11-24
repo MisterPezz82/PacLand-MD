@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).parent / 'app'))
 import runtime
+import package as desktop_package
 
 
 class DesktopTests(unittest.TestCase):
@@ -33,6 +34,31 @@ class DesktopTests(unittest.TestCase):
             cancel.set()
             with self.assertRaises(runtime.Cancelled):
                 runtime.prepare_workspace(source, Path(folder) / 'copy', lambda x: None, cancel)
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX runtime symlinks and executable modes')
+    def test_packaged_archive_extracts_intact_executable_without_source_xattrs(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'payload'
+            binary = source / 'runtime/python/bin/python3.13'
+            binary.parent.mkdir(parents=True)
+            binary.write_bytes(b'original runtime executable')
+            binary.chmod(0o755)
+            (binary.parent / 'python3').symlink_to('python3.13')
+            (source / 'build').mkdir()
+            (source / 'build/private.bin').write_bytes(b'private')
+            if sys.platform.startswith('linux'):
+                os.setxattr(binary, 'user.source-metadata', b'metadata')
+            archive = Path(folder) / 'payload.tar.gz'
+            desktop_package.archive_payload(source, archive)
+            destination = Path(folder) / 'workspace'
+            runtime.prepare_workspace(archive, destination, lambda text: None, threading.Event())
+            extracted = destination / 'runtime/python/bin/python3'
+            self.assertTrue(extracted.is_symlink())
+            self.assertTrue(os.access(extracted, os.X_OK))
+            self.assertEqual(extracted.read_bytes(), binary.read_bytes())
+            self.assertFalse((destination / 'build/private.bin').exists())
+            if sys.platform.startswith('linux'):
+                self.assertNotIn('user.source-metadata', os.listxattr(extracted))
 
     def test_payload_archive_cannot_escape_workspace(self):
         with tempfile.TemporaryDirectory() as folder:
