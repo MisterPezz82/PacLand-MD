@@ -1,0 +1,23 @@
+Pac-Land MD ROM Maker desktop launcher
+
+PySide6 and shiboken6 6.10.2
+Copyright The Qt Company Ltd. and contributors.
+Used under the GNU Lesser General Public License version 3.
+The LGPL-3.0 and accompanying GPL-3.0 licence texts are included here.
+Source: https://code.qt.io/cgit/pyside/pyside-setup.git/
+
+Qt 6.10.2
+Copyright The Qt Company Ltd. and contributors.
+The Qt modules used by this application are dynamically linked under LGPLv3.
+Source and module-specific notices: https://code.qt.io/cgit/qt/
+
+PyInstaller 6.18.0
+Copyright PyInstaller contributors.
+GPL version 2 or later with the PyInstaller bootloader distribution exception.
+https://pyinstaller.org/en/stable/license.html
+
+The bundled build payload retains its own THIRD-PARTY-NOTICES.txt, runtime
+licences and locked package metadata for Python, Node.js, Zig, Pillow, NumPy
+and romdevtools. No arcade ROMs or generated game content are included.
+
+The generated application icon was based on the user-supplied visual reference.

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Pac-Land MD ROM Maker
+Comment=Build a Mega Drive cartridge from your own Pac-Land arcade ROMs
+Exec=PacLand-ROM-Maker
+Icon=pacland-rom-maker
+Categories=Utility;
+Terminal=false

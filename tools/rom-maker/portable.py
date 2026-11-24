@@ -137,10 +137,10 @@ beside Make-ROM. No Python, Node, GCC, Visual Studio, pip or npm installation is
 needed. A normal build works offline and never downloads ROMs or dependencies.
 
 Windows x64: drop your own complete pacland.zip onto Make-ROM.bat, or double-click
-it and enter the ROM path. Linux x64: sh make-rom.sh /path/to/pacland.zip
+it and enter the ROM path. Linux/macOS: sh make-rom.sh /path/to/pacland.zip
 
 Linux requires an x86_64 Linux system with glibc 2.28 or newer; Windows
-requires 64-bit Windows 10/11. These are separate packages, not ARM/macOS builds.
+requires 64-bit Windows 10/11. Apple Silicon macOS packages use macos-arm64 runtimes.
 Allow several GB of free disk space and time for the first full build. Progress
 and diagnostic logs stay in this folder. No administrator access is required.
 
