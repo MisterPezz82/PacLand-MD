@@ -66,6 +66,37 @@
           "package": "numpy"
         }
       ]
+    },
+    "macos-arm64": {
+      "python": {
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261110/cpython-3.13.18%2B20261110-aarch64-apple-darwin-install_only_stripped.tar.gz",
+        "sha256": "7a2384641584ab9984221fcb0fc9265df465922af71be71410529e2a9c3f0540",
+        "version": "3.13.18"
+      },
+      "node": {
+        "url": "https://nodejs.org/dist/v24.22.3/node-v24.22.3-darwin-arm64.tar.gz",
+        "sha256": "ff6e17d4874b76d272212b908cc020d6e815fba5a6c7eaaa06add725840307fd",
+        "version": "24.22.3"
+      },
+      "zig": {
+        "url": "https://ziglang.org/download/0.14.1/zig-aarch64-macos-0.14.1.tar.xz",
+        "sha256": "39f3dc5e79c22088ce878edc821dedb4ca5a1cd9f5ef915e9b3cc3053e8faefa",
+        "version": "0.14.1"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/71/43/905a14a8b17fdb1ccb58d282454490662d2cb89a6bfec26af6d3520da5ec/pillow-12.2.0-cp313-cp313-macosx_11_0_arm64.whl",
+          "sha256": "56b25336f502b6ed02e889f4ece894a72612fe885889a6e8c4c80239ff6e5f5f",
+          "version": "12.2.0",
+          "package": "Pillow"
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/65/60/f2d208d366f263f39c6e69ed309290717aab41078b6d04c9be2a84fa2a07/numpy-2.5.2-cp313-cp313-macosx_11_0_arm64.whl",
+          "sha256": "52c808f96484f5571a5cc863775ce50247c17dfb3b0361f8ed6b4b0456f80080",
+          "version": "2.5.2",
+          "package": "numpy"
+        }
+      ]
     }
   }
 }
