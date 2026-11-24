@@ -34,25 +34,19 @@ The randomiser keeps trip groups intact, and when trip shuffle is on, the trip y
 
 There is no ready-made game ROM here. You supply your own Pac-Land arcade ROM set, and the maker builds the cartridge on your computer. Please use ROM data you are entitled to use; the maker does not establish permission for you.
 
-### Windows
+Download the ROM maker for your system from the [Releases page](../../releases/latest):
 
-1. Download **`Pac-Land MD ROM Maker.exe`** from the [Releases page](../../releases).
-2. Double-click it. Windows or your antivirus may warn that it is new and unsigned; on the blue "Windows protected your PC" screen choose *More info*, then *Run anyway*.
-3. Drag your `pacland.zip` onto the window, or press *Choose...*.
-4. Press **Build my ROM**. Your cartridge is saved as `Pac-Land-MD.bin` in `Documents\Pac-Land MD`.
+| System | Download | How to run it |
+| --- | --- | --- |
+| Windows 10/11 (64-bit) | `PacLand-ROM-Maker-Windows-x64.exe` | Double-click it |
+| Linux (x86-64) | `PacLand-ROM-Maker-Linux-x64.AppImage` | Mark it executable, then run it |
+| Mac (Apple Silicon) | `PacLand-ROM-Maker-macOS-Apple-Silicon.dmg` | Open the DMG and run the app inside |
 
-Nothing needs installing. The first time, the app downloads its own build tools (about 500 MB, checksum-verified, from their official sites) into its AppData folder; later builds reuse them. A build takes several minutes.
+Then drop your `pacland.zip` (or the folder it is in) onto the window, choose where to save the cartridge and press **Build my ROM**. All the build tools are included, so nothing else needs installing and nothing is downloaded. A build takes several minutes.
 
-### Linux
+The apps are not code-signed, so your system or antivirus may warn about them. On Windows, on the blue "Windows protected your PC" screen choose *More info*, then *Run anyway*.
 
-There is no Linux download on the Releases page: the maker is this repository. Download it (the green *Code* button, then *Download ZIP*, or `git clone`), then in its folder run:
-
-```sh
-sh setup.sh                       # once: downloads the build tools into this folder
-sh make-rom.sh /path/to/pacland.zip
-```
-
-The cartridge appears in `build/rom-maker-output`. The Windows app has had more use than the Linux route, so reports are welcome.
+The desktop app was contributed by [Anime0t4ku](https://github.com/Anime0t4ku); see [the desktop app notes](docs/desktop-rom-maker.md) for details, including building it yourself. Developers can also run the maker straight from this repository: `sh setup.sh` once, then `sh make-rom.sh /path/to/pacland.zip`.
 
 ### Your ROM set
 

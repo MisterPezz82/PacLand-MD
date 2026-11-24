@@ -1,6 +1,6 @@
 # Portable desktop ROM Maker
 
-The desktop application uses the existing `maker.py` pipeline. It does not change game code or the cartridge's features. The original C# Windows launcher is retained for developers who need the old source-only, download-on-first-use approach; the new release workflow builds the shared Python/PySide6 launcher instead.
+The desktop application uses the existing `maker.py` pipeline. It does not change game code or the cartridge's features. The original C# Windows launcher (`tools/rom-maker/app/Maker.cs`, released as v1.0) is retained for developers who want the small download-on-first-use approach; releases from v1.1 onwards use this shared Python/PySide6 launcher.
 
 ## Downloads
 
@@ -24,7 +24,7 @@ Only `Pac-Land-MD.bin`, `Pac-Land-MD.bin.sha256` and `build-manifest.json` are e
 
 The workflow verifies the backend's existing ROM-independent tests and desktop process/environment tests. Each packaged app then checks its bundled Python libraries, compiles and executes a native C helper, runs the backend tests, assembles the original Z80 sound player and compiles a small 68000 routine using the WASM toolchain. macOS also runs the self-test directly from a mounted read-only DMG. These checks need no arcade ROMs and do not establish full cartridge correctness; validate a complete cartridge locally with your supported ROM set before announcing a release.
 
-Successful trusted builds on `main` update the rolling `Pre-release` tag and release with the three direct downloads plus `SHA256SUMS.txt`. Pull requests upload test artifacts without publishing releases. GitHub may wrap Actions artifact downloads in ZIP containers; the actual release assets are the direct EXE, AppImage and DMG files.
+Pushes to `main` and pull requests build and test all three packages and keep them as run artifacts; nothing is published. Pushing a version tag (for example `v1.1`) builds the packages and publishes them as a full release, with `SHA256SUMS.txt` and the release text from `docs/releases/<tag>.md`. macOS is optional for publishing: if its hosted runner is unavailable, the release goes out with Windows and Linux, and re-running the macOS job later adds the DMG. GitHub may wrap Actions artifact downloads in ZIP containers; the release assets are the direct EXE, AppImage and DMG files.
 
 The workflow grants write access only to the release job. Enable GitHub Actions for the fork and permit workflow release creation. There is no need for Companion Cloud or ScreenScraper credentials.
 
