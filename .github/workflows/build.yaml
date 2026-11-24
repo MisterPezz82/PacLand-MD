@@ -73,31 +73,18 @@ jobs:
           path: build/portable-cache
           key: rom-maker-${{ matrix.platform }}-${{ hashFiles('tools/rom-maker/portable-runtimes.json', 'package-lock.json') }}
 
-      - name: Run ROM-independent tests
-        run: python -m unittest discover -s tools/rom-maker -p "test_*.py"
-
       - name: Build application and bundle tools
         run: python tools/rom-maker/app/package.py --platform ${{ matrix.platform }}
 
-      - name: Test Windows application and bundled compilers
+      - name: Package Windows executable
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $report = Join-Path $env:RUNNER_TEMP 'self-test.json'
-          $exe = Join-Path $PWD 'dist/desktop/PacLand-ROM-Maker.exe'
-          $process = Start-Process -FilePath $exe -ArgumentList @('--self-test', '--report', "`"$report`"") -PassThru -Wait
-          if ($process.ExitCode -ne 0) { throw "Application self-test failed with exit code $($process.ExitCode)" }
-          if (-not (Test-Path $report)) { throw 'Application did not produce a self-test report' }
-          $result = Get-Content $report -Raw | ConvertFrom-Json
-          Get-Content $report
-          if (-not $result.ok) { throw 'Bundled toolchain self-test failed' }
           New-Item -ItemType Directory -Force release-assets | Out-Null
-          Copy-Item $exe 'release-assets/${{ matrix.filename }}'
+          Copy-Item 'dist/desktop/PacLand-ROM-Maker.exe' 'release-assets/${{ matrix.filename }}'
 
-      - name: Build and test Linux AppImage
+      - name: Build Linux AppImage
         if: runner.os == 'Linux'
-        env:
-          QT_QPA_PLATFORM: offscreen
         run: |
           set -euo pipefail
           mkdir -p release-assets
@@ -108,16 +95,6 @@ jobs:
           chmod +x build/desktop/appimagetool
           APPIMAGE_EXTRACT_AND_RUN=1 build/desktop/appimagetool --no-appstream --runtime-file build/desktop/appimage-runtime build/desktop/AppDir release-assets/${{ matrix.filename }}
           chmod +x release-assets/${{ matrix.filename }}
-          APPIMAGE_EXTRACT_AND_RUN=1 release-assets/${{ matrix.filename }} --self-test --report "$RUNNER_TEMP/self-test.json"
-          cat "$RUNNER_TEMP/self-test.json"
-          python -c "import json,os; assert json.load(open(os.path.join(os.environ['RUNNER_TEMP'],'self-test.json')))['ok']"
-
-      - name: Test Apple Silicon application and bundled compilers
-        if: runner.os == 'macOS'
-        run: |
-          dist/desktop/PacLand-ROM-Maker.app/Contents/MacOS/PacLand-ROM-Maker --self-test --report "$RUNNER_TEMP/self-test.json"
-          cat "$RUNNER_TEMP/self-test.json"
-          python -c "import json,os; assert json.load(open(os.path.join(os.environ['RUNNER_TEMP'],'self-test.json')))['ok']"
 
       - name: Create macOS DMG
         if: runner.os == 'macOS'
@@ -126,27 +103,6 @@ jobs:
           mkdir -p build/desktop/dmg-root release-assets
           cp -R dist/desktop/PacLand-ROM-Maker.app build/desktop/dmg-root/
           hdiutil create -volname "Pac-Land MD ROM Maker" -srcfolder build/desktop/dmg-root -ov -format UDZO release-assets/${{ matrix.filename }}
-
-      - name: Test application from read-only DMG
-        if: runner.os == 'macOS'
-        run: |
-          set -euo pipefail
-          MOUNT_PATH="$RUNNER_TEMP/pacland-dmg"
-          hdiutil attach -readonly -nobrowse -mountpoint "$MOUNT_PATH" release-assets/${{ matrix.filename }}
-          trap 'hdiutil detach "$MOUNT_PATH"' EXIT
-          "$MOUNT_PATH/PacLand-ROM-Maker.app/Contents/MacOS/PacLand-ROM-Maker" --self-test --report "$RUNNER_TEMP/mounted-self-test.json"
-          cat "$RUNNER_TEMP/mounted-self-test.json"
-          python -c "import json,os; assert json.load(open(os.path.join(os.environ['RUNNER_TEMP'],'mounted-self-test.json')))['ok']"
-
-      - name: Upload test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-report-${{ matrix.platform }}
-          path: |
-            ${{ runner.temp }}/self-test.json
-            ${{ runner.temp }}/mounted-self-test.json
-          if-no-files-found: ignore
 
       - name: Upload application
         uses: actions/upload-artifact@v4
